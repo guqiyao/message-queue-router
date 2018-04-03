@@ -1,0 +1,15 @@
+com\fishing\village\annotation\MessageBody.class
+com\fishing\village\message\Message.class
+com\fishing\village\exception\MessageRouterException.class
+com\fishing\village\annotation\MessageTag.class
+com\fishing\village\resolver\parameter\ParameterResolver.class
+com\fishing\village\resolver\placeholder\AbstractPlaceholderResolver.class
+com\fishing\village\util\JSONUtils.class
+com\fishing\village\spring\MessageComponentConfig.class
+com\fishing\village\resolver\placeholder\SpringPropertyResolver.class
+com\fishing\village\resolver\parameter\DefaultParameterResolver.class
+com\fishing\village\resolver\placeholder\PlaceholderResolver.class
+com\fishing\village\ConsumerContainer.class
+com\fishing\village\MessageInvoker.class
+com\fishing\village\annotation\MessageRouter.class
+com\fishing\village\Receiver.class
