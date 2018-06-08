@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.fishing.village.spring.MessageRouterConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.mo9.message.router.spring.MessageRouterConfig
