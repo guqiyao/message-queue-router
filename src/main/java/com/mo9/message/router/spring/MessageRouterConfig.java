@@ -8,6 +8,7 @@ import com.mo9.message.router.resolver.placeholder.SpringPropertyResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Configuration
+@ConditionalOnProperty(prefix = "message.router", name = "enabled", havingValue = "true")
 public class MessageRouterConfig {
 
     @Autowired
