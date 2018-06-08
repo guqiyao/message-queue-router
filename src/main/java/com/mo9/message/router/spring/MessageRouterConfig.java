@@ -3,6 +3,7 @@ package com.mo9.message.router.spring;
 import com.mo9.message.router.ConsumerContainer;
 import com.mo9.message.router.MessageInvoker;
 import com.mo9.message.router.annotation.MessageRouter;
+import com.mo9.message.router.component.target.DefaultTargetDecoratorFactory;
 import com.mo9.message.router.resolver.placeholder.PlaceholderResolver;
 import com.mo9.message.router.resolver.placeholder.SpringPropertyResolver;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +45,7 @@ public class MessageRouterConfig {
     private ConsumerContainer createConsumerContainer() {
         ConsumerContainer consumerContainer = new ConsumerContainer();
 
+        consumerContainer.setTargetDecoratorFactory(new DefaultTargetDecoratorFactory());
         consumerContainer.setPlaceholderResolver(getPlaceholderResolver());
         consumerContainer.register(getCommands());
 

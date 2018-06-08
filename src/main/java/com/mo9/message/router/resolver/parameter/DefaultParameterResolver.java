@@ -4,6 +4,7 @@ import com.mo9.message.router.annotation.MessageBody;
 import com.mo9.message.router.exception.MessageRouterException;
 import com.mo9.message.router.message.Message;
 import com.mo9.message.router.util.JSONUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -12,6 +13,7 @@ import java.util.Objects;
 /**
  * @author qiyao.gu@qq.com.
  */
+@Slf4j
 public class DefaultParameterResolver implements ParameterResolver {
 
     private static final Object[] EMPTY_PARAMETER = new Object[0];
@@ -46,6 +48,8 @@ public class DefaultParameterResolver implements ParameterResolver {
                     parameter = JSONUtils.toBean(message.getBody(), parameterClazz);
                 } else if (parameterClazz.isAssignableFrom(Message.class)) {
                     parameter = message;
+                } else {
+                    log.warn("当前参数未匹配到对应的消息数据, parameter name : [{}]", parameterClazz.getSimpleName());
                 }
 
                 parameters[i] = parameter;
