@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.fishing.village</groupId>
+    <groupId>com.mo9.message.router</groupId>
     <artifactId>message-queue-router</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
@@ -31,6 +31,9 @@
         <slf4j-api.version>1.7.7</slf4j-api.version>
         <org.apache.commons.version>3.3.2</org.apache.commons.version>
         <org.springframework.version>4.3.14.RELEASE</org.springframework.version>
+        <!-- lombok -->
+        <org.projectlombok.version>1.16.18</org.projectlombok.version>
+
     </properties>
 
     <dependencies>
@@ -91,6 +94,15 @@
         </dependency>
         <!-- junit -->
 
+        <!-- lombok, getter/setter 编译时注入的库, 运行时不需要此库 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${org.projectlombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- lombok -->
+
     </dependencies>
 
     <build>
@@ -104,6 +116,21 @@
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
