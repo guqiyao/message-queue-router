@@ -1,5 +1,6 @@
 package com.mo9.message.router;
 
+import com.mo9.message.router.component.target.DefaultTargetDecoratorFactory;
 import com.mo9.message.router.message.Message;
 import com.mo9.message.router.resolver.placeholder.PlaceholderResolver;
 import org.junit.Before;
@@ -21,6 +22,7 @@ public class MessageQueueRouterTest {
         PlaceholderResolver placeholderResolver = new StringPlaceholderResolver();
         ConsumerContainer consumerContainer = new ConsumerContainer();
         consumerContainer.setPlaceholderResolver(placeholderResolver);
+        consumerContainer.setTargetDecoratorFactory(new DefaultTargetDecoratorFactory());
 
         List<Object> consumers = new ArrayList<>();
         consumers.add(consumer);

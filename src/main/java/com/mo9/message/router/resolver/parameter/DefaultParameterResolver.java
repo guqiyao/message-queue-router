@@ -1,12 +1,11 @@
 package com.mo9.message.router.resolver.parameter;
 
 import com.mo9.message.router.annotation.MessageBody;
-import com.mo9.message.router.exception.MessageRouterException;
+import com.mo9.message.router.exception.ParameterInjectException;
 import com.mo9.message.router.message.Message;
 import com.mo9.message.router.util.JSONUtils;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Objects;
 
@@ -14,9 +13,7 @@ import java.util.Objects;
  * @author qiyao.gu@qq.com.
  */
 @Slf4j
-public class DefaultParameterResolver implements ParameterResolver {
-
-    private static final Object[] EMPTY_PARAMETER = new Object[0];
+public class DefaultParameterResolver extends AbstractParameterResolver {
 
     private static final DefaultParameterResolver DEFAULT_PARAMETER_RESOLVER = new DefaultParameterResolver();
 
@@ -29,16 +26,13 @@ public class DefaultParameterResolver implements ParameterResolver {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Object[] resolve(Method handler, Message message) {
-        Parameter[] parameterTypes = handler.getParameters();
-        if (isEmpty(parameterTypes)) {
-            return EMPTY_PARAMETER;
-        }
+    protected Object[] resolve(Parameter[] parameterTypes, Message message) {
+        int parameterLength = parameterTypes.length;
 
-        Object[] parameters = new Object[parameterTypes.length];
+        Object[] parameters = new Object[parameterLength];
 
         try {
-            for (int i = 0; i < parameterTypes.length; i ++) {
+            for (int i = 0; i < parameterLength; i ++) {
                 Parameter parameterType = parameterTypes[i];
                 Class parameterClazz = parameterType.getType();
                 Object parameter = null;
@@ -57,12 +51,8 @@ public class DefaultParameterResolver implements ParameterResolver {
             }
             return parameters;
         } catch (Exception e) {
-            throw new MessageRouterException("参数注入失败", e);
+            throw new ParameterInjectException("参数注入失败", e);
         }
-
     }
 
-    private boolean isEmpty(Parameter[] parameters) {
-        return parameters.length == 0;
-    }
 }
