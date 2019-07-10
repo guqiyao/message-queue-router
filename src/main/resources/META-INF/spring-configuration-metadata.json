@@ -1,0 +1,19 @@
+{
+    "groups" : [
+        {
+            "sourceType" : "io.github.guqiyao.spring.MessageRouterConfigBean",
+            "name" : "message.router",
+            "type" : "io.github.guqiyao.spring.MessageRouterConfigBean"
+        }
+    ],
+    "properties" : [
+        {
+            "sourceType" : "io.github.guqiyao.spring.MessageRouterConfigBean",
+            "defaultValue" : false,
+            "name" : "message.router.enabled",
+            "type" : "java.lang.Boolean",
+            "description" : "是否开启Rocket MQ Message Router组件功能"
+        }
+    ],
+    "hints" : []
+}
