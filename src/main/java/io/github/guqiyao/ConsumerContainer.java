@@ -33,9 +33,7 @@ public class ConsumerContainer {
     }
 
     private void register(Object command) {
-        Object target = ObjectProxyUtils.getTarget(command);
-
-        Class commandClass = target.getClass();
+        Class commandClass = getOriginClass(command);
 
         MessageRouter router = (MessageRouter) commandClass.getAnnotation(MessageRouter.class);
 
@@ -97,6 +95,10 @@ public class ConsumerContainer {
         int methodModifiers = Modifier.methodModifiers();
 
         return (methodModifiers | method.getModifiers()) <= methodModifiers;
+    }
+
+    private Class getOriginClass(Object command) {
+        return ObjectProxyUtils.getTarget(command).getClass();
     }
 
 }
