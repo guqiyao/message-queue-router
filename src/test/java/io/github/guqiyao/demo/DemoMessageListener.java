@@ -15,7 +15,7 @@ public class DemoMessageListener extends AbstractMessageListener {
 	protected Action pre(Message message) {
 		//消息处理前进行前置处理, 可以进行重复消息过滤, 日志记录等
 
-		return null;
+		return Action.SUCCESS;
 	}
 
 	@Override
