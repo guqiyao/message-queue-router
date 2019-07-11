@@ -3,6 +3,7 @@ package io.github.guqiyao;
 import io.github.guqiyao.annotation.MessageRouter;
 import io.github.guqiyao.annotation.MessageTag;
 import io.github.guqiyao.component.target.TargetDecoratorFactory;
+import io.github.guqiyao.exception.MessageRouterException;
 import io.github.guqiyao.message.Message;
 import io.github.guqiyao.resolver.placeholder.PlaceholderResolver;
 import io.github.guqiyao.util.MessageRouterUtils;
@@ -62,9 +63,14 @@ public class ConsumerContainer {
             }
 
             String tagValue = placeholderResolver.get(tag.value());
+            String key = MessageRouterUtils.generateReceiverKey(topic, tagValue);
+
+            boolean isContain = receiverMaps.containsKey(key);
+            if (isContain) {
+                throw new MessageRouterException("已有相同的Consumer在应用中, topic : %s, tag %s");
+            }
 
             Receiver receiver = new Receiver(targetDecoratorFactory.create(command), method);
-            String key = MessageRouterUtils.generateReceiverKey(topic, tagValue);
 
             log.info("新增receiver, receiver name : [{}], method name : [{}], topic : [{}], tag : [{}]",
                     receiverName, methodName, topic, tagValue);
