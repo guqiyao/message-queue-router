@@ -65,7 +65,7 @@ public class ConsumerContainer {
 
             boolean isContain = receiverMaps.containsKey(key);
             if (isContain) {
-                throw new MessageRouterException("已有相同的Consumer在应用中, topic : %s, tag %s");
+                throw new MessageRouterException(String.format("已有相同的Consumer在应用中, topic : %s, tag %s", topic, tagValue));
             }
 
             Receiver receiver = new Receiver(targetDecoratorFactory.create(command), method);
