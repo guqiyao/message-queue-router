@@ -12,4 +12,4 @@
 
 ### 消息消费
 
-![Markdown](http://i2.tiimg.com/693493/332578d6a99f001e.png)
+![Markdown](http://i2.tiimg.com/693493/6d5241645da48c70.jpg)
