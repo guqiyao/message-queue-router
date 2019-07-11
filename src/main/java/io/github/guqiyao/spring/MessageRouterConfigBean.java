@@ -14,14 +14,13 @@ public class MessageRouterConfigBean {
 
 	static final String PREFIX = "message.router";
 
-	private boolean enabled = false;
+	private boolean enable = false;
 
-	public boolean isEnabled() {
-		return enabled;
+	public boolean isEnable() {
+		return enable;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setEnable(boolean enable) {
+		this.enable = enable;
 	}
-
 }

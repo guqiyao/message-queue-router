@@ -1,8 +1,16 @@
 # message-queue-router
 基于Spring boot 与 Aliyun Rocket MQ SDK的消息消费路由项目
 
-## Demo
-[demo](https://github.com/guqiyao/message-queue-router/tree/master/src/test/java/io/github/guqiyao/demo)
+## 使用
+
+### 配置
+```yaml
+message:
+    router:
+        enable: true
+```
+
+[代码Demo](https://github.com/guqiyao/message-queue-router/tree/master/src/test/java/io/github/guqiyao/demo)
 
 ## 工作原理
 

@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @Slf4j
 @Configuration
-@ConditionalOnProperty(prefix = MessageRouterConfigBean.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = MessageRouterConfigBean.PREFIX, name = "enable", havingValue = "true")
 public class MessageRouterConfig {
 
     @Autowired
