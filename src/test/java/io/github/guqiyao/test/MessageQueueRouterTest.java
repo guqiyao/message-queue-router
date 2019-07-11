@@ -1,5 +1,7 @@
-package io.github.guqiyao;
+package io.github.guqiyao.test;
 
+import io.github.guqiyao.ConsumerContainer;
+import io.github.guqiyao.MessageInvoker;
 import io.github.guqiyao.component.target.DefaultTargetDecoratorFactory;
 import io.github.guqiyao.message.Message;
 import io.github.guqiyao.resolver.placeholder.PlaceholderResolver;

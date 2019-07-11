@@ -1,4 +1,4 @@
-package io.github.guqiyao;
+package io.github.guqiyao.test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.github.guqiyao.annotation.MessageBody;

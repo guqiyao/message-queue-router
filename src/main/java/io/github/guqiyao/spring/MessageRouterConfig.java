@@ -38,9 +38,9 @@ public class MessageRouterConfig {
     public void after() {
         final MessageInvoker messageInvoker = messageInvoker();
 
-        Map<String, AbstractMessageListener> messageListeners = applicationContext.getBeansOfType(AbstractMessageListener.class);
+        Map<String, AbstractMessageListener> abstractMessageListeners = applicationContext.getBeansOfType(AbstractMessageListener.class);
 
-        messageListeners.values().forEach(messageListener -> messageListener.setMessageInvoker(messageInvoker));
+        abstractMessageListeners.values().forEach(messageListener -> messageListener.setMessageInvoker(messageInvoker));
     }
 
     private MessageInvoker messageInvoker() {

@@ -5,8 +5,11 @@ import com.aliyun.openservices.ons.api.ConsumeContext;
 import com.aliyun.openservices.ons.api.Message;
 import com.aliyun.openservices.ons.api.MessageListener;
 import io.github.guqiyao.MessageInvoker;
+import io.github.guqiyao.exception.MessageRouterException;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Objects;
 
 /**
  * @Author: qiyao.gu
@@ -22,7 +25,7 @@ public abstract class AbstractMessageListener implements MessageListener {
 	private MessageInvoker messageInvoker;
 
 	@Override
-	public Action consume(Message message, ConsumeContext consumeContext) {
+	public final Action consume(Message message, ConsumeContext consumeContext) {
 		io.github.guqiyao.message.Message data = messageConverter.convert(message);
 
 		if (log.isInfoEnabled()) {
@@ -32,6 +35,10 @@ public abstract class AbstractMessageListener implements MessageListener {
 
 		try {
 			io.github.guqiyao.Action action = pre(data);
+			if (Objects.isNull(action)) {
+				throw new MessageRouterException("pre方法的返回值不能为NULL!");
+			}
+
 			if (action == io.github.guqiyao.Action.REPEATED_MESSAGE) {
 				if (log.isWarnEnabled()) {
 					log.warn(String.format("当前消息作为重复消息进行过滤, topic : %s, message id : %s, tag : %s, key : %s, body : %s",

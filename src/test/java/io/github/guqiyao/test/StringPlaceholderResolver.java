@@ -1,4 +1,4 @@
-package io.github.guqiyao;
+package io.github.guqiyao.test;
 
 import io.github.guqiyao.resolver.placeholder.AbstractPlaceholderResolver;
 

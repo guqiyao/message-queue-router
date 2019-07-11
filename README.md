@@ -1,2 +1,5 @@
-# message-queque-router
-消息路由项目
+# message-queue-router
+基于Aliyun Rocket MQ SDK的消息消费路由项目
+
+## Demo
+
