@@ -5,6 +5,7 @@ import io.github.guqiyao.annotation.MessageRouter;
 import io.github.guqiyao.annotation.MessageTag;
 import io.github.guqiyao.message.Message;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
  * @Eamil: qiyao.gu@nalaa.com
  * @Date: 2019/7/10 18:26
  */
+@Component
 @MessageRouter(topic = "demo.topic")
 public class ConsumerDemo {
 

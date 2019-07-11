@@ -43,7 +43,7 @@ public class MessageConfig {
 		Subscription subscription = new Subscription();
 		subscription.setTopic("topic");
 
-		//即Tag，可以设置成具体的Tag，如 taga||tagb||tagc，也可设置成*。 *仅代表订阅所有Tag，不支持通配
+		//即Tag,可以设置成具体的Tag,如 taga||tagb||tagc,也可设置成*, *仅代表订阅所有Tag,不支持通配
 		subscription.setExpression("*");
 
 		Map<Subscription, MessageListener> map = new HashMap<>();
