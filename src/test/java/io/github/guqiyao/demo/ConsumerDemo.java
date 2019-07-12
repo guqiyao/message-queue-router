@@ -15,6 +15,9 @@ import java.math.BigDecimal;
  * @Date: 2019/7/10 18:26
  */
 @Component
+//@MessageRouter将会读取配置文件中所配置的key : 'demo.topic' 对应的value
+//下列@MssageTag注解也是相同
+//当配置文件中的key不存在时, 则使用当前所填写的key作为value, 以@MessageRouter为例, 当'demo.topic'未配置, 那么demo.topic将会作为value
 @MessageRouter(topic = "demo.topic")
 public class ConsumerDemo {
 
