@@ -1,5 +1,6 @@
 package io.github.guqiyao.test;
 
+import io.github.guqiyao.ConsumerBeanHolder;
 import io.github.guqiyao.ConsumerContainer;
 import io.github.guqiyao.MessageInvoker;
 import io.github.guqiyao.component.target.DefaultTargetDecoratorFactory;
@@ -26,8 +27,8 @@ public class MessageQueueRouterTest {
         consumerContainer.setPlaceholderResolver(placeholderResolver);
         consumerContainer.setTargetDecoratorFactory(new DefaultTargetDecoratorFactory());
 
-        List<Object> consumers = new ArrayList<>();
-        consumers.add(consumer);
+        List<ConsumerBeanHolder> consumers = new ArrayList<>();
+        consumers.add(new ConsumerBeanHolder(consumer));
 
         consumerContainer.register(consumers);
 

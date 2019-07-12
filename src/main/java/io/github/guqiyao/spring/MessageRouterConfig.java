@@ -1,5 +1,6 @@
 package io.github.guqiyao.spring;
 
+import io.github.guqiyao.ConsumerBeanHolder;
 import io.github.guqiyao.ConsumerContainer;
 import io.github.guqiyao.MessageInvoker;
 import io.github.guqiyao.annotation.MessageRouter;
@@ -16,9 +17,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author qiyao.gu@qq.com.
@@ -56,7 +57,7 @@ public class MessageRouterConfig {
 
         consumerContainer.setTargetDecoratorFactory(new DefaultTargetDecoratorFactory());
         consumerContainer.setPlaceholderResolver(getPlaceholderResolver());
-        consumerContainer.register(getCommands());
+        consumerContainer.register(getConsumers());
 
         return consumerContainer;
     }
@@ -65,9 +66,13 @@ public class MessageRouterConfig {
      * 获取commands
      * @return  commands
      */
-    private List<Object> getCommands() {
+    private List<ConsumerBeanHolder> getConsumers() {
         Map<String, Object> map = applicationContext.getBeansWithAnnotation(MessageRouter.class);
-        return new ArrayList<>(map.values());
+
+        return map.values()
+           .stream()
+           .map(ConsumerBeanHolder::new)
+           .collect(Collectors.toList());
     }
 
     /**

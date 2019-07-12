@@ -7,7 +7,6 @@ import io.github.guqiyao.exception.MessageRouterException;
 import io.github.guqiyao.message.Message;
 import io.github.guqiyao.resolver.placeholder.PlaceholderResolver;
 import io.github.guqiyao.util.MessageRouterUtils;
-import io.github.guqiyao.util.ObjectProxyUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
@@ -28,20 +27,16 @@ public class ConsumerContainer {
 
     private ConcurrentHashMap<String, Receiver> receiverMaps = new ConcurrentHashMap<>();
 
-    public void register(List<Object> commands) {
-        commands.forEach(this::register);
+    public void register(List<ConsumerBeanHolder> consumers) {
+        consumers.forEach(this::register);
     }
 
-    private void register(Object command) {
-        Class commandClass = getOriginClass(command);
+    private void register(ConsumerBeanHolder consumer) {
+        String topic = getTopic(consumer.getRouter());
 
-        MessageRouter router = (MessageRouter) commandClass.getAnnotation(MessageRouter.class);
+        Method[] methods = consumer.getMethods();
 
-        String topicPlaceholder = router.topic();
-
-        String topic = placeholderResolver.get(topicPlaceholder);
-
-        Method[] methods = commandClass.getDeclaredMethods();
+        String receiverName = consumer.getBeanName();
 
         for (Method method : methods) {
             String methodName = method.getName();
@@ -50,8 +45,6 @@ public class ConsumerContainer {
                 log.warn("当前方法非实例方法, method name : [{}]", methodName);
                 continue;
             }
-
-            String receiverName = commandClass.getSimpleName();
 
             MessageTag tag = method.getAnnotation(MessageTag.class);
             if (Objects.isNull(tag)) {
@@ -68,7 +61,7 @@ public class ConsumerContainer {
                 throw new MessageRouterException(String.format("已有相同的Consumer在应用中, topic : %s, tag %s", topic, tagValue));
             }
 
-            Receiver receiver = new Receiver(targetDecoratorFactory.create(command), method);
+            Receiver receiver = new Receiver(targetDecoratorFactory.create(consumer.getConsumerBean()), method);
 
             log.info("新增receiver, receiver name : [{}], method name : [{}], topic : [{}], tag : [{}]",
                     receiverName, methodName, topic, tagValue);
@@ -97,8 +90,8 @@ public class ConsumerContainer {
         return (methodModifiers | method.getModifiers()) <= methodModifiers;
     }
 
-    private Class getOriginClass(Object command) {
-        return ObjectProxyUtils.getTarget(command).getClass();
+    private String getTopic(MessageRouter router) {
+        String topicPlaceholder = router.topic();
+        return placeholderResolver.get(topicPlaceholder);
     }
-
 }
