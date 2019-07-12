@@ -7,9 +7,9 @@ import io.github.guqiyao.message.Message;
  * @Eamil: qiyao.gu@nalaa.com
  * @Date: 2019/7/10 16:26
  */
-class MessageConverter {
+public class MessageConverter {
 
-	Message convert(com.aliyun.openservices.ons.api.Message message) {
+	public Message convert(com.aliyun.openservices.ons.api.Message message) {
 		RocketMessage data = new RocketMessage();
 
 		data.setBody(new String(message.getBody()));

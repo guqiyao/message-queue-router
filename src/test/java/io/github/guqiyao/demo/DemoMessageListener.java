@@ -2,7 +2,7 @@ package io.github.guqiyao.demo;
 
 import io.github.guqiyao.Action;
 import io.github.guqiyao.message.Message;
-import io.github.guqiyao.rocket.AbstractMessageListener;
+import io.github.guqiyao.AbstractMessageListener;
 
 /**
  * @Author: qiyao.gu

@@ -16,7 +16,7 @@ public class MessageInvoker {
         this.consumerContainer = consumerContainer;
     }
 
-    public Object invoke(Message message) {
+    Object invoke(Message message) {
         Receiver receiver = consumerContainer.getReceiver(message);
         if (Objects.isNull(receiver)) {
             throw new NotFoundReceiverException(String.format("未获取到对应的消息处理器, 当前topic : %s, tag : %s",

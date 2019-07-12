@@ -7,16 +7,15 @@ import io.github.guqiyao.annotation.MessageRouter;
 import io.github.guqiyao.component.target.DefaultTargetDecoratorFactory;
 import io.github.guqiyao.resolver.placeholder.PlaceholderResolver;
 import io.github.guqiyao.resolver.placeholder.SpringPropertyResolver;
-import io.github.guqiyao.rocket.AbstractMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,16 +34,8 @@ public class MessageRouterConfig {
     @Autowired
     private ConfigurableEnvironment configurableEnvironment;
 
-    @PostConstruct
-    public void after() {
-        final MessageInvoker messageInvoker = messageInvoker();
-
-        Map<String, AbstractMessageListener> abstractMessageListeners = applicationContext.getBeansOfType(AbstractMessageListener.class);
-
-        abstractMessageListeners.values().forEach(messageListener -> messageListener.setMessageInvoker(messageInvoker));
-    }
-
-    private MessageInvoker messageInvoker() {
+    @Bean
+    public MessageInvoker messageInvoker() {
         return new MessageInvoker(createConsumerContainer());
     }
 

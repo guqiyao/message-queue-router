@@ -3,6 +3,7 @@ package io.github.guqiyao.demo;
 import com.aliyun.openservices.ons.api.MessageListener;
 import com.aliyun.openservices.ons.api.bean.ConsumerBean;
 import com.aliyun.openservices.ons.api.bean.Subscription;
+import io.github.guqiyao.MessageInvoker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,8 +20,12 @@ import java.util.Properties;
 public class MessageConfig {
 
 	@Bean
-	public DemoMessageListener demoMessageListener() {
-		return new DemoMessageListener();
+	public DemoMessageListener demoMessageListener(MessageInvoker invoker) {
+		DemoMessageListener demoMessageListener = new DemoMessageListener();
+
+		demoMessageListener.setMessageInvoker(invoker);
+
+		return demoMessageListener;
 	}
 
 	@Bean
