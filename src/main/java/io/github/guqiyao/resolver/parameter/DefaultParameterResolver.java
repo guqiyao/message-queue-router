@@ -43,7 +43,9 @@ public class DefaultParameterResolver extends AbstractParameterResolver {
                 } else if (parameterClazz.isAssignableFrom(Message.class)) {
                     parameter = message;
                 } else {
-                    log.warn("当前参数未匹配到对应的消息数据, parameter name : [{}]", parameterClazz.getSimpleName());
+                    if (log.isWarnEnabled()) {
+                        log.warn("当前参数未匹配到对应的消息数据, parameter name : [{}]", parameterClazz.getSimpleName());
+                    }
                 }
 
                 parameters[i] = parameter;
