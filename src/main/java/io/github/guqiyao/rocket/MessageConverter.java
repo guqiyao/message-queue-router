@@ -9,7 +9,7 @@ import io.github.guqiyao.message.Message;
  */
 public class MessageConverter {
 
-	public Message convert(com.aliyun.openservices.ons.api.Message message) {
+	public static Message convert(com.aliyun.openservices.ons.api.Message message) {
 		RocketMessage data = new RocketMessage();
 
 		data.setBody(new String(message.getBody()));

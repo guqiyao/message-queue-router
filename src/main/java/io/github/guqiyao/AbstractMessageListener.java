@@ -19,18 +19,16 @@ import java.util.Objects;
 @Slf4j
 public abstract class AbstractMessageListener implements MessageListener {
 
-	private MessageConverter messageConverter = new MessageConverter();
-
 	@Setter
 	private MessageInvoker messageInvoker;
 
 	@Override
 	public final Action consume(Message message, ConsumeContext consumeContext) {
-		io.github.guqiyao.message.Message data = messageConverter.convert(message);
+		io.github.guqiyao.message.Message data = MessageConverter.convert(message);
 
 		if (log.isInfoEnabled()) {
-			log.info(String.format("接收消息, topic : %s, message id : %s, tag : %s, key : %s, body : %s",
-					data.getTopic(), data.getMessageId(), data.getTag(), data.getKey(), data.getBody()));
+			log.info("接收消息, topic : [{}], message id : [{}], tag : [{}], key : [{}], body : [{}]",
+					data.getTopic(), data.getMessageId(), data.getTag(), data.getKey(), data.getBody());
 		}
 
 		try {
@@ -41,8 +39,8 @@ public abstract class AbstractMessageListener implements MessageListener {
 
 			if (action == io.github.guqiyao.Action.REPEATED_MESSAGE) {
 				if (log.isWarnEnabled()) {
-					log.warn(String.format("当前消息作为重复消息进行过滤, topic : %s, message id : %s, tag : %s, key : %s, body : %s",
-							data.getTopic(), data.getMessageId(), data.getTag(), data.getKey(), data.getBody()));
+					log.warn("当前消息作为重复消息进行过滤, topic : [{}], message id : [{}], tag : [{}], key : [{}], body : [{}]",
+							data.getTopic(), data.getMessageId(), data.getTag(), data.getKey(), data.getBody());
 				}
 
 				return Action.CommitMessage;
