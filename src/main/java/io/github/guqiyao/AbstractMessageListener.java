@@ -38,8 +38,8 @@ public abstract class AbstractMessageListener implements MessageListener {
 			}
 
 			if (action == io.github.guqiyao.Action.REPEATED_MESSAGE) {
-				if (log.isWarnEnabled()) {
-					log.warn("当前消息作为重复消息进行过滤, topic : [{}], message id : [{}], tag : [{}], key : [{}], body : [{}]",
+				if (log.isInfoEnabled()) {
+					log.info("当前消息作为重复消息进行过滤, topic : [{}], message id : [{}], tag : [{}], key : [{}], body : [{}]",
 							data.getTopic(), data.getMessageId(), data.getTag(), data.getKey(), data.getBody());
 				}
 
