@@ -6,20 +6,42 @@
 
     <groupId>io.github.guqiyao</groupId>
     <artifactId>message-queue-router</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>Internal Releases</name>
-            <url>http://maven.mo9.com/nexus/content/repositories/releases</url>
-        </repository>
         <snapshotRepository>
-            <id>Snapshots</id>
-            <name>Internal Snapshots</name>
-            <url>http://maven.mo9.com/nexus/content/repositories/snapshots</url>
+            <id>mvnrepository</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
         </snapshotRepository>
+        <repository>
+            <id>mvnrepository</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <tag>master</tag>
+        <url>git@github.com:guqiyao/message-queue-router.git</url>
+        <connection>scm:git@github.com:guqiyao/message-queue-router.git</connection>
+        <developerConnection>scm:git@github.com:guqiyao/message-queue-router.git</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>qiyao.gu</name>
+            <email>125307126@qq.com</email>
+            <organization>Personal</organization>
+            <organizationUrl>http://github.com/guqiyao</organizationUrl>
+        </developer>
+    </developers>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -153,6 +175,67 @@
                         <phase>compile</phase>
                         <goals>
                             <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <tags>
+                        <tag>
+                            <name>Author</name>
+                            <placement>a</placement>
+                            <head>作者</head>
+                        </tag>
+                        <tag>
+                            <name>Eamil</name>
+                            <placement>a</placement>
+                            <head>邮箱</head>
+                        </tag>
+                        <tag>
+                            <name>Date</name>
+                            <placement>a</placement>
+                            <head>日期</head>
+                        </tag>
+                    </tags>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
                         </goals>
                     </execution>
                 </executions>

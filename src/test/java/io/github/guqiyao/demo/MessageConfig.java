@@ -28,7 +28,7 @@ public class MessageConfig {
 		return demoMessageListener;
 	}
 
-	@Bean
+	@Bean(initMethod = "start", destroyMethod = "shutdown")
 	public ConsumerBean consumerBean(MessageListener messageListener) {
 		ConsumerBean consumerBean = new ConsumerBean();
 

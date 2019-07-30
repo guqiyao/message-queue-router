@@ -1,7 +1,11 @@
 package io.github.guqiyao.test;
 
-import io.github.guqiyao.util.MessageRouterUtils;
-import org.apache.commons.lang3.time.StopWatch;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import io.github.guqiyao.util.JSONUtils;
+import lombok.Data;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: qiyao.gu
@@ -10,20 +14,41 @@ import org.apache.commons.lang3.time.StopWatch;
  */
 public class KeyGenerateTest {
 
-	public static void main(String[] args) {
-		String topic = "fafuli_company_business";
-		String tag = "allocation";
+	public static void main(String[] args) throws JsonProcessingException {
+//		String topic = "fafuli_company_business";
+//		String tag = "allocation";
+//
+//		int count = 10000;
+//		StopWatch stopWatch = new StopWatch();
+//		stopWatch.start();
+//
+//		for (int i = 0 ; i < count ; i ++) {
+//			MessageRouterUtils.generateReceiverKey(topic + i, tag);
+//		}
+//
+//		stopWatch.stop();
+//
+//		System.out.println(stopWatch.getTime());
 
-		int count = 10000;
-		StopWatch stopWatch = new StopWatch();
-		stopWatch.start();
+		Map<String, Person> map = new HashMap<>();
+		Person person = new Person();
+		person.age = 10;
+		person.name = "10";
 
-		for (int i = 0 ; i < count ; i ++) {
-			MessageRouterUtils.generateReceiverKey(topic + i, tag);
-		}
+		map.put("1", person);
 
-		stopWatch.stop();
+		person = new Person();
+		person.age = 11;
+		person.name = "11";
 
-		System.out.println(stopWatch.getTime());
+		map.put("2", person);
+
+		System.out.println(JSONUtils.toJson(map));
+	}
+
+	@Data
+	private static class Person {
+		String name;
+		int age;
 	}
 }
