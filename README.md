@@ -3,6 +3,15 @@
 
 ## 使用
 
+### Maven
+```
+<dependency>
+    <groupId>io.github.guqiyao</groupId>
+    <artifactId>message-queue-router</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 ### 配置
 ```yaml
 message:
