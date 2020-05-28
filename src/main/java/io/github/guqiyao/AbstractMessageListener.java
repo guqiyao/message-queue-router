@@ -46,7 +46,12 @@ public abstract class AbstractMessageListener implements MessageListener {
 				return Action.CommitMessage;
 			}
 
-			messageInvoker.invoke(data);
+			InvokeResult result = messageInvoker.invoke(data);
+
+			if (result.equals(InvokeResult.IGNORE)) {
+				log.info("当前消息未匹配到对应的处理器, 直接忽略, tag : [{}]", data.getTag());
+				return Action.CommitMessage;
+			}
 
 			post(data);
 

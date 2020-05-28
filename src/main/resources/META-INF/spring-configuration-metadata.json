@@ -13,6 +13,13 @@
             "name" : "message.router.enable",
             "type" : "java.lang.Boolean",
             "description" : "是否开启Rocket MQ Message Router组件功能"
+        },
+        {
+            "sourceType" : "io.github.guqiyao.spring.MessageRouterConfigBean",
+            "defaultValue" : false,
+            "name" : "message.router.ignore-mismatch-tag",
+            "type" : "java.lang.Boolean",
+            "description" : "是否忽略不匹配的tag"
         }
     ],
     "hints" : []

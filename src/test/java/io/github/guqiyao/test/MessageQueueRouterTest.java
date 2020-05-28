@@ -32,7 +32,7 @@ public class MessageQueueRouterTest {
 
         consumerContainer.register(consumers);
 
-        messageInvoker = new MessageInvoker(consumerContainer);
+        messageInvoker = new MessageInvoker(true, consumerContainer);
     }
 
     @Test

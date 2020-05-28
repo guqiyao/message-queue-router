@@ -10,6 +10,7 @@ import io.github.guqiyao.resolver.placeholder.SpringPropertyResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -34,9 +35,12 @@ public class MessageRouterConfig {
     @Autowired
     private ConfigurableEnvironment configurableEnvironment;
 
+    @Value("${message.router.ignore-mismatch-tag:false}")
+    private boolean ignoreMismatchTag;
+
     @Bean
     public MessageInvoker messageInvoker() {
-        return new MessageInvoker(createConsumerContainer());
+        return new MessageInvoker(ignoreMismatchTag, createConsumerContainer());
     }
 
     /**
