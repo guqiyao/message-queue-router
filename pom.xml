@@ -55,7 +55,7 @@
         <java.version>1.8</java.version>
 
         <junit.version>4.12</junit.version>
-        <jackson.version>2.10.0</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
         <slf4j-api.version>1.7.7</slf4j-api.version>
         <org.apache.commons.version>3.3.2</org.apache.commons.version>
         <org.springframework.version>4.3.14.RELEASE</org.springframework.version>
